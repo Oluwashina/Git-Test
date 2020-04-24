@@ -55,7 +55,16 @@
            <li>List Item Six</li>
        </ul>
        <p>Hello Everyone, this is oluwashina Ojo.</p>
-       
+    
+   </div>
+
+   <div>
+       <h1>Mailer in node.js</h1>
+       <input id="to" type="text" placeholder="Enter email ID where you want to send" /><br>
+       <input id="subject" type="text" placeholder="Write Subject" /><br>
+       <textarea id="content" cols="40" rows="5" placeholder="Write what you want to send"></textarea>
+       <button id="send_email">Send Email</button>
+       <span id="message"></span>
    </div>
 
 
@@ -67,7 +76,21 @@
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script>
         // $('h1').hide();
+        $(document).ready(function(){
+
         $('p span').css('color', 'red')
+        $('#send_email').click(function(){
+            var to = $('#to').val();
+            var subject = $('#subject').val();
+            var text = $('#content').val();
+            $('#message').text("Sending E-mail....Please wait");
+            $.get("https://stormy-dawn-61890.herokuapp.com/send", {to: to, subject:subject, requirement: text}, function(data){
+                if(data=="sent"){
+                    $('#message').text("Email is been sent at "+to+" . Please check inbox! ");
+                }
+            })
+        })
+    });
     </script>
 </body>
 </html>
